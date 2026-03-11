@@ -26,7 +26,28 @@ public class PasswordGenerator {
                 System.out.print("How many passwords generate: ");
                 int count = sc.nextInt();
 
-                String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+                System.out.print("Include uppercase letters? (y/n): ");
+                char upper = sc.next().charAt(0);
+
+                System.out.print("Include numbers? (y/n): ");
+                char numbers = sc.next().charAt(0);
+
+                System.out.print("Include symbols? (y/n): ");
+                char symbols = sc.next().charAt(0);
+
+                String chars = "abcdefghijklmnopqrstuvwxyz";
+
+                if(upper == 'y') {
+                    chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                }
+
+                if(numbers == 'y') {
+                    chars += "0123456789";
+                }
+
+                if(symbols == 'y') {
+                    chars += "!@#$%&*";
+                }
 
                 for(int j = 1; j <= count; j++) {
 
@@ -37,7 +58,6 @@ public class PasswordGenerator {
                         int index = (int)(Math.random() * chars.length());
 
                         password += chars.charAt(index);
-
                     }
 
                     System.out.println("Password " + j + ": " + password);
