@@ -1,6 +1,8 @@
 package com.password.generator;
 
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class PasswordGenerator {
 
@@ -49,18 +51,32 @@ public class PasswordGenerator {
                     chars += "!@#$%&*";
                 }
 
-                for(int j = 1; j <= count; j++) {
+                try {
 
-                    String password = "";
+                    FileWriter writer = new FileWriter("passwords.txt", true);
 
-                    for(int i = 0; i < length; i++) {
+                    for(int j = 1; j <= count; j++) {
 
-                        int index = (int)(Math.random() * chars.length());
+                        String password = "";
 
-                        password += chars.charAt(index);
+                        for(int i = 0; i < length; i++) {
+
+                            int index = (int)(Math.random() * chars.length());
+
+                            password += chars.charAt(index);
+                        }
+
+                        System.out.println("Password " + j + ": " + password);
+
+                        writer.write(password + "\n");
                     }
 
-                    System.out.println("Password " + j + ": " + password);
+                    writer.close();
+
+                    System.out.println("Passwords saved to passwords.txt");
+
+                } catch(IOException e) {
+                    System.out.println("Error saving passwords.");
                 }
             }
 
